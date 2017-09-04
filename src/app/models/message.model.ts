@@ -1,4 +1,4 @@
-import { Conversation } from '../conversation-list/conversation.model'
+import { Conversation } from './conversation.model'
 
 export class Message {
     // Change these fields to match the models in the db
