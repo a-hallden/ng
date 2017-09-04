@@ -17,8 +17,9 @@ import { BackendService } from './services/backend.service';
 // Auth
 import { routing } from './app.routing';
 import { AuthGuard } from './guards/index';
-import { AuthenticationService, UserService } from './services/index';
-import { LoginComponent } from './login/index';
+import { AuthenticationService } from './services/index';
+import { UserService } from './services/user.service';
+import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/index';
 import { fakeBackendProvider } from './helpers/index';
 import { MockBackend, MockConnection } from '@angular/http/testing';
@@ -37,6 +38,8 @@ const appRoutes: Routes = [
     HeaderComponent,
     MessagesListComponent,
     MessageComponent,
+    LoginComponent,
+    HomeComponent,
   ],
   imports: [
     AlertModule.forRoot(),
