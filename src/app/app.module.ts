@@ -16,6 +16,14 @@ import { BackendService } from './services/backend.service';
 
 // Auth
 import { routing } from './app.routing';
+import { AuthGuard } from './guards/index';
+import { AuthenticationService, UserService } from './services/index';
+import { LoginComponent } from './login/index';
+import { HomeComponent } from './home/index';
+import { fakeBackendProvider } from './helpers/index';
+import { MockBackend, MockConnection } from '@angular/http/testing';
+import { BaseRequestOptions } from '@angular/http';
+
 
 const appRoutes: Routes = [
   // Routes go here
@@ -28,7 +36,7 @@ const appRoutes: Routes = [
     ConversationItemComponent,
     HeaderComponent,
     MessagesListComponent,
-    MessageComponent
+    MessageComponent,
   ],
   imports: [
     AlertModule.forRoot(),
@@ -36,9 +44,18 @@ const appRoutes: Routes = [
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
+    routing,
   ],
   providers: [
     BackendService,
+    AuthGuard,
+    AuthenticationService,
+    UserService,
+
+    // fake backend
+    fakeBackendProvider,
+    MockBackend,
+    BaseRequestOptions,
   ],
   bootstrap: [AppComponent]
 })
