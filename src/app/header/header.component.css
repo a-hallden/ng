@@ -1,0 +1,19 @@
+.container {
+	height: auto;
+	min-height: 100vh;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	padding-left: 0;
+	padding-right: 0;
+	background-color: #cccccc;
+}
+
+.navbar {
+	border-radius: 0;
+  font-size: 20px;
+}
+
+span {
+	padding-left: 1em;
+	padding-right: 1em;
+}

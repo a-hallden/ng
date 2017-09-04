@@ -1,0 +1,20 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="panel-title">
+      All conversations
+    </div>
+  </div>
+  <div class="panel-body" style="overflow: auto;">
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="list-group">
+          <app-conversation-item
+            *ngFor="let c of conversations"
+            [conversation]="c"
+            (conversationSelected)="onConversationSelected(r)">
+          </app-conversation-item>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

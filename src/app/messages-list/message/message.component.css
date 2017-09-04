@@ -1,0 +1,10 @@
+p {
+    border-left: 3px solid lightblue;
+    background-color: #f4f8fa;
+    padding-left: 10px;
+  }
+  
+  #timestamp {
+    float: right;
+  }
+  
