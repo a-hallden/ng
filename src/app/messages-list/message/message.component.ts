@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Message } from '../../models/message.model'
 
 
@@ -9,14 +9,9 @@ import { Message } from '../../models/message.model'
 })
 export class MessageComponent implements OnInit {
   @Input() message: Message;
-  @Output() selected = new EventEmitter<void>();
 
   constructor() { }
 
   ngOnInit() {
-  }
-
-  onSelected() {
-    this.selected.emit()
   }
 }

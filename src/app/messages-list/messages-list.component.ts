@@ -1,6 +1,8 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 import { Message } from '../models/message.model'
 import { BackendService } from '../services/backend.service';
+import { MessageService } from '../services/message.service';
+import { ServerService } from '../services/server.service';
 
 @Component({
   selector: 'app-messages-list',
@@ -8,49 +10,62 @@ import { BackendService } from '../services/backend.service';
   styleUrls: ['./messages-list.component.css']
 })
 export class MessagesListComponent implements OnInit {
-  m: Message;
-  // This is temporary, meant to be populated with a http request
-  messages: Message[] = [
-    new Message(1, 'message text goes here', new Date(), 'user_1'),
-    new Message(1, 'message text goes here', new Date(), 'user_1'),
-    new Message(1, 'message text goes here', new Date(), 'user_1'),
-    new Message(1, 'message text goes here', new Date(), 'user_1'),
-    new Message(1, 'message text goes here', new Date(), 'user_1'),
-    new Message(1, 'message text goes here', new Date(), 'user_1'),
-    new Message(1, 'message text goes here', new Date(), 'user_1'),
-    new Message(1, 'message text goes here', new Date(), 'user_1'),
-    new Message(1, 'message text goes here', new Date(), 'user_1'),
-    new Message(1, 'message text goes here', new Date(), 'user_1'),
-    new Message(1, 'message text goes here', new Date(), 'user_1'),
-    new Message(1, 'message text goes here', new Date(), 'user_1'),
-    new Message(1, 'message text goes here', new Date(), 'user_1'),
-    new Message(1, 'message text goes here', new Date(), 'user_1'),
-    new Message(1, 'message text goes here', new Date(), 'user_1'),
-    new Message(1, 'message text goes here', new Date(), 'user_1'),
-    new Message(1, 'message text goes here', new Date(), 'user_1'),
-    new Message(1, 'message text goes here', new Date(), 'user_1'),
-    new Message(1, 'message text goes here', new Date(), 'user_1'),
-    new Message(1, 'message text goes here', new Date(), 'user_1'),
-    new Message(1, 'message text goes here', new Date(), 'user_1'),
-    new Message(1, 'message text goes here', new Date(), 'user_1'),
-    new Message(1, 'message text goes here', new Date(), 'user_1'),
-    new Message(1, 'message text goes here', new Date(), 'user_1'),
-  ]
+  @ViewChild('msg') msgRef: ElementRef;
 
-  constructor(private backendService: BackendService) { }
+  // This is temporary, meant to be populated with a http request
+  messages = [
+    {
+      id: 1,
+      message_text: 'message text',
+      timestamp: new Date(),
+      sent_by: 'hallden',
+    }
+  ];
+
+  servers = [
+    {
+      name: 'name',
+      id: 1
+    },
+    {
+      name: 'name2',
+      id: 2
+    },
+  ];
+
+  constructor(
+    private backendService: BackendService, 
+    private messageService: MessageService,
+    private serverService: ServerService) { }
 
   ngOnInit() {
-    // this.backendService.getMessages().subscribe(
-    //   (messages: Message[]) => this.messages = messages,
-    //   (error) => console.log(error)
-    // )
   }
 
-  onSend(message: string) {
-    this.m = new Message(Math.round(Math.random() * 10000), message, new Date, 'username');
-    this.messages.push(this.m);
-    this.backendService.postMessage(this.m).subscribe(
-      (response) => console.log(response));
+  getMessages() {
+    this.messageService.getMessages().subscribe(
+      (data: any[]) => this.messages = data,
+      (error) => console.log(error),
+    );
+  }
+
+  onSend() {
+    var messageText = this.msgRef.nativeElement.value;
+    var message = new Message(this.id(), messageText, new Date, 'username');
+    
+    this.messageService.postMessage(message).subscribe(
+      (response) => console.log(response),
+      (error) => console.log(error),
+    );
+    // this.messages.push(message);
+  }
+
+  onGet() {
+    console.log(this.servers);
+    this.messageService.getServers()
+      .subscribe(
+        (servers: any[]) => this.servers = servers,
+        (error) => console.log(error)
+      );
   }
 
   id() {

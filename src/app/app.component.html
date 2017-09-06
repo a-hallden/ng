@@ -1,4 +1,7 @@
 <app-header></app-header>
+
+
+
 <div class="container">
   <div class="row">
     <div class="col-md-4">
@@ -10,12 +13,9 @@
   </div>
 </div>
 
-<h1>test</h1>
-
 <div class="container">
   <div class="row">
-    <div class="col-sm-8 col-sm-offset-2">
-      <h1>testing</h1>
+    <div class="col-sm-8 col-sm-offset-2"> <!-- this bit messes up the styling of the component being displayed, make sure to do the styling for each component in that component and let this just be a row -->
       <router-outlet></router-outlet> <!-- meant to display the contents of each view based on the current path -->
     </div>
   </div>

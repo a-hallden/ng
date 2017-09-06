@@ -8,8 +8,7 @@
     <div class="col-md-12">
       <app-message
         *ngFor="let m of messages"
-        [message]="m"
-        (messageSelected)="onSelected(m)">
+        [message]="m">
       </app-message>
     </div>
   </div>
@@ -17,7 +16,9 @@
 
 <form>
   <label for="newmessage">New message: </label>
-  <textarea name="newmessage" class="form-control" rows="5" placeholder="..." #messageText></textarea>
+  <textarea id="newmessage" class="form-control" rows="5" placeholder="..." #msg></textarea>
   <br />
-  <button type="submit" class="btn btn-primary send-button" (click)=onSend(messageText)>Send</button>
+  <button type="submit" class="btn btn-primary send-button" (click)=onSend()>Send</button>
 </form>
+
+<button class="btn btn-primary" (click)="onGet()">update</button>
